@@ -19,8 +19,14 @@ class ImageCompressor {
 
         // Quality slider
         qualitySlider.addEventListener('input', (e) => {
-            qualityValue.textContent = `${e.target.value}%`;
+            const value = e.target.value;
+            qualityValue.textContent = `${value}%`;
+            // Update CSS custom property for progress visualization
+            qualitySlider.style.setProperty('--slider-progress', `${value}%`);
         });
+
+        // Initialize slider progress
+        qualitySlider.style.setProperty('--slider-progress', `${qualitySlider.value}%`);
 
         // Click to select files
         uploadArea.addEventListener('click', () => {
