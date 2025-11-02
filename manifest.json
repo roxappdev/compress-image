@@ -3,6 +3,12 @@
   "name": "Image Compressor",
   "version": "1.0.0",
   "description": "Compress images using browser-image-compression library",
+  "icons": {
+    "16": "icons/logo.png",
+    "32": "icons/logo.png",
+    "48": "icons/logo.png",
+    "128": "icons/logo.png"
+  },
   "permissions": [
     "activeTab",
     "sidePanel"
@@ -11,7 +17,12 @@
     "default_path": "sidebar.html"
   },
   "action": {
-    "default_title": "Open Image Compressor"
+    "default_title": "Open Image Compressor",
+    "default_icon": {
+      "16": "icons/logo.png",
+      "32": "icons/logo.png",
+      "48": "icons/logo.png"
+    }
   },
   "background": {
     "service_worker": "background.js"
