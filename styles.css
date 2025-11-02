@@ -81,7 +81,12 @@ h1 {
     color: #555;
 }
 
-.setting-group input {
+.setting-group input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.setting-group input[type="number"] {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
@@ -92,6 +97,13 @@ h1 {
 .setting-group input:focus {
     outline: none;
     border-color: #3498db;
+}
+
+.quality-info {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+    text-align: center;
 }
 
 .compress-btn {
@@ -196,4 +208,22 @@ h1 {
 
 .ratio-poor {
     color: #e74c3c;
+}
+
+.download-all-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.download-all-btn:hover {
+    background-color: #8e44ad;
 }

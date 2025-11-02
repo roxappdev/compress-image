@@ -5,6 +5,7 @@ class ImageCompressor {
     }
 
     init() {
+        this.compressedFiles = [];
         this.setupEventListeners();
     }
 
@@ -12,6 +13,14 @@ class ImageCompressor {
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
         const compressBtn = document.getElementById('compressBtn');
+        const qualitySlider = document.getElementById('quality');
+        const qualityValue = document.getElementById('qualityValue');
+        const downloadAllBtn = document.getElementById('downloadAllBtn');
+
+        // Quality slider
+        qualitySlider.addEventListener('input', (e) => {
+            qualityValue.textContent = `${e.target.value}%`;
+        });
 
         // Click to select files
         uploadArea.addEventListener('click', () => {
@@ -43,6 +52,11 @@ class ImageCompressor {
         // Compress button
         compressBtn.addEventListener('click', () => {
             this.compressImages();
+        });
+
+        // Download all button
+        downloadAllBtn.addEventListener('click', () => {
+            this.downloadAllFiles();
         });
     }
 
@@ -94,7 +108,8 @@ class ImageCompressor {
         compressBtn.disabled = true;
 
         try {
-            const quality = parseFloat(document.getElementById('quality').value) || 0.8;
+            const qualityPercent = parseInt(document.getElementById('quality').value) || 80;
+            const quality = qualityPercent / 100;
 
             const compressionOptions = {
                 maxSizeMB: 10,
@@ -106,7 +121,7 @@ class ImageCompressor {
             };
 
             resultsList.innerHTML = '';
-            const compressedFiles = [];
+            this.compressedFiles = [];
 
             for (const file of this.files) {
                 try {
@@ -119,12 +134,13 @@ class ImageCompressor {
                     const compressedSize = compressedFile.size;
                     const ratio = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
                     
-                    compressedFiles.push({
+                    this.compressedFiles.push({
                         originalFile: file,
                         compressedFile: compressedFile,
                         originalSize: originalSize,
                         compressedSize: compressedSize,
-                        ratio: ratio
+                        ratio: ratio,
+                        fileName: file.name
                     });
 
                     this.addResultItem(file.name, originalSize, compressedSize, ratio, compressedFile);
@@ -220,6 +236,22 @@ class ImageCompressor {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+    }
+
+    downloadAllFiles() {
+        if (this.compressedFiles.length === 0) {
+            alert('No compressed files available to download');
+            return;
+        }
+
+        // Download each file with a small delay to avoid browser blocking
+        this.compressedFiles.forEach((fileData, index) => {
+            setTimeout(() => {
+                this.downloadFile(fileData.compressedFile, fileData.fileName);
+            }, index * 300); // 300ms delay between downloads
+        });
+
+        alert(`Started downloading ${this.compressedFiles.length} file(s)`);
     }
 }
 
