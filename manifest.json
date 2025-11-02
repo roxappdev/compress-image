@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Image Compressor",
   "version": "1.0.0",
-  "description": "Compress images using browser-image-compression library",
+  "description": "Compress images (JPG, PNG, WebP), reduce image size",
   "icons": {
     "16": "icons/128.png",
     "32": "icons/128.png",
