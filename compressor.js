@@ -94,13 +94,10 @@ class ImageCompressor {
         compressBtn.disabled = true;
 
         try {
-            const maxWidth = parseInt(document.getElementById('maxWidth').value) || 1920;
-            const maxHeight = parseInt(document.getElementById('maxHeight').value) || 1080;
             const quality = parseFloat(document.getElementById('quality').value) || 0.8;
 
             const compressionOptions = {
                 maxSizeMB: 10,
-                maxWidthOrHeight: Math.max(maxWidth, maxHeight),
                 useWebWorker: true,
                 maxIteration: 10,
                 exifOrientation: 1,
